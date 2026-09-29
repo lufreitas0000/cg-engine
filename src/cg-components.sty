@@ -20,19 +20,16 @@
 
 % --- QR Code Infrastructure ---
 \ExplSyntaxOn
+\providecommand{\CGQRDir}{build/qrcodes}
 \DeclareDocumentCommand{\CGRenderQRCodeInternal}{ m m }{
     \begin{minipage}[t]{18mm}
         \centering
-        \IfFileExists{production/production_assets/production_qrcodes/#1}{
-            \adjustbox{width=18mm, height=18mm}{\includegraphics{production/production_assets/production_qrcodes/#1}}
+        \IfFileExists{\CGQRDir/#1}{
+            \adjustbox{width=18mm, height=18mm}{\includegraphics{\CGQRDir/#1}}
         }{
-            \IfFileExists{tests/tests_assets/tests_qrcodes/#1}{
-                \adjustbox{width=18mm, height=18mm}{\includegraphics{tests/tests_assets/tests_qrcodes/#1}}
-            }{
-                \fcolorbox{gray!50}{gray!5}{
-                    \begin{minipage}[c][18mm][c]{\dimexpr 18mm-2\fboxsep-2\fboxrule\relax}
-                    \end{minipage}
-                }
+            \fcolorbox{gray!50}{gray!5}{
+                \begin{minipage}[c][18mm][c]{\dimexpr 18mm-2\fboxsep-2\fboxrule\relax}
+                \end{minipage}
             }
         }
         \tl_if_empty:nF {#2} {

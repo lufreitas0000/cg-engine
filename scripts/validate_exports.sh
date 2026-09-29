@@ -2,7 +2,8 @@
 set -e
 
 echo "Validating plain text export schemas..."
-FILES=("export/list_alpha.txt" "export/list_grade.txt")
+EXPORT_DIR="${1:-${CG_EXPORT_DIR:-build/export}}"
+FILES=("$EXPORT_DIR/list_alpha.txt" "$EXPORT_DIR/list_grade.txt")
 
 for file in "${FILES[@]}"; do
     if [ ! -f "$file" ]; then

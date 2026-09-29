@@ -1,0 +1,22 @@
+--- doc/image_standards.md
++++ doc/image_standards.md
+@@ -1,6 +1,24 @@
+ # Climbing Guide Image Standards (V1.9)
+ 
++## Flat Image Architecture (fig/)
++All images (covers, topos, maps, action photos) must reside in a single flat directory `fig/` tracked by DVC. Do not use nested directories.
++
++### Naming Convention
++Use lowercase `snake_case` in the format `<scope>_<role>_<identifier>.<ext>`:
++
++| Scope (`<scope>`) | Role (`<role>`) | Identifier (`<identifier>`) | Concrete Example | Purpose |
++| --- | --- | --- | --- | --- |
++| `book` | `cover` | `front`, `back` | `book_cover_front.jpg` | Main guidebook front/back covers |
++| `book` | `map` | `overview`, `access` | `book_map_overview.pdf` | General regional/approach maps |
++| `<zone_slug>` | `cover` | `main` (or omitted) | `catedral_cover.jpg` | Zone splash/opener photograph |
++| `<zone_slug>` | `map` | `sector`, `approach` | `catedral_map_sector.pdf` | Zone-specific sector/approach map |
++| `<zone_slug>` | `topo` | `01`, `02`, `<subsector>` | `catedral_topo_01.jpg` | Photo-topo or vector-topo with route lines |
++| `<zone_slug>` | `act` | `<route_slug>` or `01` | `catedral_act_fenda.jpg` | Action climbing photograph |
++
+ ## Print Geometry Baseline
+ * **Paper Width (with bleed):** 150mm

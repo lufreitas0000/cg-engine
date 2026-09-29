@@ -1,6 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{cg-engine}[2026/09/02 API State Management]
 \RequirePackage{xparse}
+\RequirePackage{graphicx}
+\graphicspath{{fig/}{tests/fig/}{build/qrcodes/}}
 \directlua{cg = require("climbingguide")}
 
 \ExplSyntaxOn
@@ -56,10 +58,14 @@
 \ExplSyntaxOff
 
 \AtEndDocument{
-    \directlua{cg.export_json("export/database.json")}
-    \directlua{cg.export_text_lists("export/")}
+    \directlua{
+        local export_dir = os.getenv("CG_EXPORT_DIR") or "build/export"
+        os.execute("mkdir -p " .. export_dir)
+        cg.export_json(export_dir .. "/database.json")
+        cg.export_text_lists(export_dir .. "/")
+        cg.export_qr_manifest(export_dir .. "/qrcodes_manifest.json")
+    }
     \directlua{cg.export_stats_aux("\luaescapestring{\jobname.cgstats}")}
-    \directlua{cg.export_qr_manifest("export/qrcodes_manifest.json")}
 }
 
 \AtBeginDocument{

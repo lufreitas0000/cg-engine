@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-LOG_FILE="tests/system_fonts.log"
+LOG_FILE="${1:-build/system_fonts.log}"
 echo "--- System Font Audit ---" > "$LOG_FILE"
 MISSING=0
 while IFS= read -r font || [[ -n "$font" ]]; do
@@ -13,10 +13,10 @@ while IFS= read -r font || [[ -n "$font" ]]; do
         echo "[FATAL] Missing Font: $font" | tee -a "$LOG_FILE"
         MISSING=1
     fi
-done < scripts/fonts.in
+done < "$(dirname "$0")/fonts.in"
 
 if [ "$MISSING" -eq 1 ]; then
-    echo "Error: Required fonts are missing. Check tests/system_fonts.log"
+    echo "Error: Required fonts are missing. Check $LOG_FILE"
     exit 1
 fi
 exit 0
