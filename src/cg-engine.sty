@@ -65,7 +65,7 @@
         cg.export_text_lists(export_dir .. "/")
         cg.export_qr_manifest(export_dir .. "/qrcodes_manifest.json")
     }
-    \directlua{cg.export_stats_aux("\luaescapestring{\jobname.cgstats}")}
+    \directlua{cg.export_stats_aux((os.getenv("CG_BUILD_DIR") or "build") .. "/" .. "\luaescapestring{\jobname.cgstats}")}
 }
 
 \AtBeginDocument{
