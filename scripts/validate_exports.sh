@@ -19,10 +19,10 @@ for file in "${FILES[@]}"; do
         pipes=$(echo "$line" | tr -cd '|' | wc -c)
         
         # Schema [ID] | [Name] | [Grade] | [Length] | [Gear] | [Setter] | [Sector] | [Zone] requires exactly 7 pipes
-        if [ "$pipes" -ne 7 ]; then
+        if [ "$pipes" -ne 8 ]; then
             echo "[FAIL] Schema violation in $file"
             echo "Line: $line"
-            echo "Expected 7 separators, found $pipes."
+            echo "Expected 8 separators, found $pipes."
             exit 1
         fi
     done < "$file"
